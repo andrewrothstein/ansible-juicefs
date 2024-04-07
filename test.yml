@@ -1,0 +1,14 @@
+---
+- name: Testing andrewrothstein.juicefs role
+  hosts: all
+  tasks:
+    - name: Installing andrewrothstein.juicefs
+      ansible.builtin.include_role:
+        name: '{{ playbook_dir }}'
+    - name: Executing 'juicefs --version'
+      ansible.builtin.command: juicefs --version
+      changed_when: false
+      register: 'juicefs_test_output'
+    - name: Output from 'juicefs --version'
+      ansible.builtin.debug:
+        msg: '{{ juicefs_test_output.stdout }}'

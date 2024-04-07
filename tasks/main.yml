@@ -1,0 +1,58 @@
+---
+- name: Install unarchivedeps
+  ansible.builtin.include_role:
+    name: andrewrothstein.unarchivedeps
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- name: Look for install at {{ juicefs_exe }}
+  ansible.builtin.stat:
+    path: '{{ juicefs_exe }}'
+  register: juicefs_binary
+- name: Downloading and installing juicefs
+  when: not juicefs_binary.stat.exists
+  block:
+    - name: Downloading {{ juicefs_url }} to {{ juicefs_tmp_archive }}
+      become: true
+      become_user: root
+      ansible.builtin.get_url:
+        url: '{{ juicefs_url }}'
+        dest: '{{ juicefs_tmp_archive }}'
+        mode: '644'
+        checksum: '{{ juicefs_checksum }}'
+    - name: Mkdir {{ juicefs_install_dir }}
+      become: true
+      become_user: root
+      ansible.builtin.file:
+        path: '{{ juicefs_install_dir }}'
+        state: directory
+        mode: '755'
+    - name: Unarchive {{ juicefs_tmp_archive }} to {{ juicefs_install_dir }}
+      become: true
+      become_user: root
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: '{{ juicefs_tmp_archive }}'
+        dest: '{{ juicefs_install_dir }}'
+        creates: '{{ juicefs_exe }}'
+  always:
+    - name: Rm {{ juicefs_tmp_archive }}
+      become: true
+      become_user: root
+      ansible.builtin.file:
+        path: '{{ juicefs_tmp_archive }}'
+        state: absent
+- name: Linking {{ juicefs_link }} to {{ juicefs_exe }}
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    src: '{{ juicefs_exe }}'
+    dest: '{{ juicefs_link }}'
+    state: link

@@ -1,0 +1,12 @@
+---
+# vars file for juicefs
+juicefs_os: '{{ ansible_system | lower }}'
+juicefs_arch: '{{ juicefs_arch_map[ansible_architecture] }}'
+juicefs_platform: '{{ juicefs_os }}-{{ juicefs_arch }}'
+juicefs_file: juicefs-{{ juicefs_ver }}-{{ juicefs_platform }}.tar.gz
+juicefs_url: '{{ juicefs_mirror }}/v{{ juicefs_ver }}/{{ juicefs_file }}'
+juicefs_tmp_archive: '{{ juicefs_tmp_dir | default("/tmp") }}/{{ juicefs_file }}'
+juicefs_checksum: '{{ juicefs_checksums[juicefs_ver][juicefs_platform] }}'
+juicefs_install_dir: '{{ juicefs_parent_install_dir }}/juicefs-{{ juicefs_ver }}'
+juicefs_exe: '{{ juicefs_install_dir }}/juicefs'
+juicefs_link: '{{ juicefs_parent_install_dir }}/bin/juicefs'
