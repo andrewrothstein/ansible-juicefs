@@ -1,6 +1,6 @@
 ---
 # defaults file for juicefs
-juicefs_ver: 1.1.2
+juicefs_ver: 1.2.0
 juicefs_mirror: https://github.com/juicedata/juicefs/releases/download
 juicefs_parent_install_dir: /usr/local
 juicefs_arch_map:
@@ -20,3 +20,15 @@ juicefs_checksums:
     linux-arm64: sha256:eb7c308954ab0b7638483ffbe50e73b49c1c951ef7f61f6bdb561a7ce37b7adf
     # https://github.com/juicedata/juicefs/releases/download/v1.1.2/juicefs-1.1.2-windows-amd64.tar.gz
     windows-amd64: sha256:7baf3a8561fa4c2e0473d3b344b45f6e205203e01d2e7dff94dcc52155270828
+  # https://github.com/juicedata/juicefs/releases/download/v1.2.0/checksums.txt
+  '1.2.0':
+    # https://github.com/juicedata/juicefs/releases/download/v1.2.0/juicefs-1.2.0-darwin-amd64.tar.gz
+    darwin-amd64: sha256:2a39d3816b200a15bbe99bb100bb3641a55837f78149904011cabad69fcb30cd
+    # https://github.com/juicedata/juicefs/releases/download/v1.2.0/juicefs-1.2.0-darwin-arm64.tar.gz
+    darwin-arm64: sha256:6851d9ad354890936f395d8c63f4a7146f03725ee6375f61dbbe0d03caaa7fff
+    # https://github.com/juicedata/juicefs/releases/download/v1.2.0/juicefs-1.2.0-linux-amd64.tar.gz
+    linux-amd64: sha256:28d6360c58b19627b07ea7c9f831c2162911f6eef7165289ff9bda465e256e0a
+    # https://github.com/juicedata/juicefs/releases/download/v1.2.0/juicefs-1.2.0-linux-arm64.tar.gz
+    linux-arm64: sha256:ef1781676feaffc0a007f09589e3c19f97d4299e90628f9830452ff2d4651d5f
+    # https://github.com/juicedata/juicefs/releases/download/v1.2.0/juicefs-1.2.0-windows-amd64.tar.gz
+    windows-amd64: sha256:35f634a2c36af17685a218f59d2d6b2a86d41de7042b50d265a015d4bfd89084
