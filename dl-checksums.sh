@@ -40,4 +40,5 @@ dl_ver() {
     dl $ver $lhashes windows amd64
 }
 
-dl_ver ${1:-1.2.3}
+dl_ver 1.2.4
+dl_ver ${1:-1.3.0}

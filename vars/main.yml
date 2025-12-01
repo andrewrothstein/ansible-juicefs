@@ -1,7 +1,7 @@
 ---
 # vars file for juicefs
-juicefs_os: '{{ ansible_system | lower }}'
-juicefs_arch: '{{ juicefs_arch_map[ansible_architecture] }}'
+juicefs_os: '{{ ansible_facts["system"] | lower }}'
+juicefs_arch: '{{ juicefs_arch_map[ansible_facts["architecture"]] }}'
 juicefs_platform: '{{ juicefs_os }}-{{ juicefs_arch }}'
 juicefs_file: juicefs-{{ juicefs_ver }}-{{ juicefs_platform }}.tar.gz
 juicefs_url: '{{ juicefs_mirror }}/v{{ juicefs_ver }}/{{ juicefs_file }}'
